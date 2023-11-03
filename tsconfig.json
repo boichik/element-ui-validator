@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "target": "es2022",
+    "emitDeclarationOnly": false,
+    "inlineSourceMap": false,
+    "strict": true,
+    "allowJs": true,
+    "noEmitHelpers": false,
+    "noResolve": false,
+    "noEmit": false,
+    "noEmitOnError":false,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "./lib",
+    "lib": ["es2022", "dom", "dom.iterable"],
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules", "lib"]
+}
