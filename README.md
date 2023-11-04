@@ -1,8 +1,9 @@
-# @boichik/element-ui-validator
+# element-ui-validator
 
 This package is intended to simplify the construction of validation rules for form fields for the [ElementUI](https://www.npmjs.com/package/element-ui) library
 
 ## Links
+
 - [ElementUIRuleBuilder](#elementuirulebuilder)
   - [Config](#config)
   - [Error messages](#error-messages)
@@ -36,15 +37,15 @@ This package is intended to simplify the construction of validation rules for fo
 Using npm or yarn
 
 ```bash
-npm install @boichik/element-ui-validator
+npm install element-ui-validator
 // or
-yarn add @boichik/element-ui-validator
+yarn add element-ui-validator
 ```
 
 Using CDN
 
 ```js
-<script src="https://unpkg.com/@boichik/element-ui-validator@latest/lib/index.umd.js"></script>
+<script src="https://unpkg.com/element-ui-validator@latest/lib/index.umd.js"></script>
 ```
 
 ## Usage
@@ -52,7 +53,7 @@ Using CDN
 ### ES6
 
 ```ts
-import { createElementUIRuleBuilderFactory } from '@boichik/element-ui-validator'
+import { createElementUIRuleBuilderFactory } from 'element-ui-validator'
 
 createElementUIRuleBuilderFactory(...)
 ```
@@ -60,7 +61,7 @@ createElementUIRuleBuilderFactory(...)
 ### No ES6
 
 ```js
-const elementUIValidator = require('@boichik/element-ui-validator')
+const elementUIValidator = require('element-ui-validator')
 
 elementUIValidator.createElementUIRuleBuilderFactory(...)
 ```
@@ -88,7 +89,7 @@ Creating a builder with specific settings
 import {
 	ElementUIRuleBuilderImpl,
 	createRegexpValidatorFactory,
-} from '@boichik/element-ui-validator';
+} from 'element-ui-validator';
 
 export const validatorBuilder = new ElementUIRuleBuilderImpl({
 	validators: {
@@ -141,7 +142,7 @@ Creating a builder with specific settings
 import {
 	createElementUIRuleBuilderFactory,
 	createRegexpValidatorFactory,
-} from '@boichik/element-ui-validator';
+} from 'element-ui-validator';
 
 export const validatorBuilder = createElementUIRuleBuilderFactory({
 	validators: {
@@ -206,7 +207,7 @@ export const TYPES = {
 
 ```ts
 // file container.ts
-import { createElementUIRuleBuilderFactory, createRegexpValidatorFactory, ElementUIRuleBuilder } from '@boichik/element-ui-validator';
+import { createElementUIRuleBuilderFactory, createRegexpValidatorFactory, ElementUIRuleBuilder } from 'element-ui-validator';
 import { Container } from  'inversify';
 import { TYPES } from './types';
 
@@ -237,7 +238,7 @@ container.bind<ElementUIRuleBuilder>(TYPES.ElementRuleBuilder).toDynamicValue(()
 Example of validator object
 
 ```js
-import { createNumberValidatorFactory, createStringValidatorFactory, RegexpValidator } from '@boichik/element-ui-validator';
+import { createNumberValidatorFactory, createStringValidatorFactory, RegexpValidator } from 'element-ui-validator';
 
 const validatorsForConfig = {
 	numberValidator: createNumberValidatorFactory(...),
@@ -274,7 +275,7 @@ Example of using a validator:
 
 ```js
 // file stringValidator.js
-import { createStringValidatorFactory } from '@boichik/element-ui-validator';
+import { createStringValidatorFactory } from 'element-ui-validator';
 
 const defaultErrorMessages = {
 	invalidFormat: val => `Value "${val}" is not in the correct format!`,
@@ -311,7 +312,7 @@ Example of using a validator with a builder:
 
 ```js
 // file exampleString.js
-import { createStringValidatorFactory, createElementUIRuleBuilderFactory } from '@boichik/element-ui-validator';
+import { createStringValidatorFactory, createElementUIRuleBuilderFactory } from 'element-ui-validator';
 
 const ruleBuilder = createElementUIRuleBuilderFactory({
 	validators: {
@@ -335,9 +336,9 @@ const stringRule = ruleBuilder().useValidator("stringValidator", { minLength: 1,
 
 #### StringValidator Error Messages
 
-| Name             | Description                                                                                                 | Type                                                        | 
-| ---------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| invalidFormat    | Error message when value is not a string (null, boolean, number...)                                         | `string` or `((val: any) => string)`                          |
+| Name             | Description                                                                                                 | Type                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| invalidFormat    | Error message when value is not a string (null, boolean, number...)                                         | `string` or `((val: any) => string)`                           |
 | invalidMinLength | Error message when length is less than specified **minLength**                                              | `string` or `((min: number, val: any) => string)`              |
 | invalidMaxLength | Error message when value length is greater than specified **maxLength**                                     | `string` or `((max: number, val: any) => string)`              |
 | invalidRange     | Error message when value length is less than or greater than specified **minLength & maxLength** parameters | `string` or `((min: number, max: number, val: any) => string)` |
@@ -352,7 +353,7 @@ Example of using a validator:
 
 ```js
 // file numberValidator.js
-import { createNumberValidatorFactory } from '@boichik/element-ui-validator';
+import { createNumberValidatorFactory } from 'element-ui-validator';
 
 const defaultErrorMessages = {
 	invalidFormat: val => `Value "${val}" is not in the correct format!`,
@@ -411,7 +412,7 @@ Example of using a validator with a builder:
 
 ```js
 // file exampleNumber.js
-import { createNumberValidatorFactory, createElementUIRuleBuilderFactory } from '@boichik/element-ui-validator';
+import { createNumberValidatorFactory, createElementUIRuleBuilderFactory } from 'element-ui-validator';
 
 const ruleBuilder = createElementUIRuleBuilderFactory({
 	validators: {
@@ -425,21 +426,21 @@ const numberRule = ruleBuilder().useValidator("numberValidator", { min: 1, max: 
 
 #### NumberValidator Config
 
-| Name          | Description                                                                                                                                    | Type                  |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| min           | Minimum number. This parameter is responsible for the fact that the value entered must be greater than this.                                   | `number`              |
-| max           | Minimum number. Maximum number. This parameter is responsible for the fact that the entered value should be less than this.                    | `number`              |
-| minStrict     | Minimum strict number. This parameter is responsible for the fact that the value entered must be greater than and not equal to it.             | `number`              |
-| maxStrict     | Maximum strict number. This parameter is responsible for the fact that the value entered must be less than and not equal to it.                | `number`              |
-| allowString   | Allow numbers with string type.                                                                                                                | `boolean`             |
+| Name          | Description                                                                                                                                    | Type                     |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| min           | Minimum number. This parameter is responsible for the fact that the value entered must be greater than this.                                   | `number`                 |
+| max           | Minimum number. Maximum number. This parameter is responsible for the fact that the entered value should be less than this.                    | `number`                 |
+| minStrict     | Minimum strict number. This parameter is responsible for the fact that the value entered must be greater than and not equal to it.             | `number`                 |
+| maxStrict     | Maximum strict number. This parameter is responsible for the fact that the value entered must be less than and not equal to it.                | `number`                 |
+| allowString   | Allow numbers with string type.                                                                                                                | `boolean`                |
 | type          | Type of number. Using this parameter, you can validate values by type of number (integer or floating point).All types are accepted by default. | `'integer'` or `'float'` |
-| decimalPlaces | Number of decimal places                                                                                                                       | `number`              |
-| messages      | Object with error messages                                                                                                                     | `object`              |
+| decimalPlaces | Number of decimal places                                                                                                                       | `number`                 |
+| messages      | Object with error messages                                                                                                                     | `object`                 |
 
 #### NumberValidator Error Messages
 
-| Name                      | Description                                                                                                                                    | Type                      |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Name                      | Description                                                                                                                                    | Type                                                             |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------- |
 | invalidFormat             | Error message when value is not a number                                                                                                       | `string` or `((value: any) => string)`                           |
 | invalidType               | Error message when the value does not match the type ("integer" or "float") that was set in the configuration                                  | `string` or `((type: 'integer'                                   | 'float', value: any) => string)` |
 | invalidDecimalPlaces      | Error message when the value is greater than the decimal point than is set in the configuration                                                | `string` or `((decimal: number, value: any) => string)`          |
@@ -459,17 +460,17 @@ _The use of this validator is possible using the appropriate class, or using a f
 
 #### DateValidator Config
 
-| Name     | Description                                              | Type                        |
-| -------- | -------------------------------------------------------- | --------------------------- |
+| Name     | Description                                              | Type                     |
+| -------- | -------------------------------------------------------- | ------------------------ |
 | minDate  | Minimum date. Date must be greater than or equal to this | `Date I string I number` |
 | maxDate  | Maximum date. Date must be less than or equal to this    | `Date I string I number` |
-| messages | Object with error messages                               | `object` |
+| messages | Object with error messages                               | `object`                 |
 
 #### DateValidator Error Messages
 
-| Name           | Description                                                                                                                                                                | Type    
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| invalidFormat  | Error message when value is not a date                                                                                                                                     | string` or `((val: any) => string)                        |
+| Name           | Description                                                                                                                                                                | Type                                                       |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| invalidFormat  | Error message when value is not a date                                                                                                                                     | string`or`((val: any) => string)                           |
 | invalidMinDate | Error message when the value must be greater than or equal to the parameter "**minDate**" set in the configuration                                                         | `string` or `((min: Date, val: any) => string)`            |
 | invalidMaxDate | Error message when the value must be less than or equal to the parameter "**maxDate**" set in the configuration                                                            | `string` or `((max: Date, val: any) => string)`            |
 | invalidRange   | Error message when the value must be greater than or equal to the parameter "**minDate**" or be less than or equal to the parameter "**maxDate**" set in the configuration | `string` or `((min: Date, max: Date, val: any) => string)` |
@@ -488,8 +489,8 @@ _The use of this validator is possible using the appropriate class, or using a f
 
 #### BooleanValidator Error Messages
 
-| Name          | Description                               | Type                              |
-| ------------- | ----------------------------------------- | ------------------------------ |
+| Name          | Description                               | Type                                 |
+| ------------- | ----------------------------------------- | ------------------------------------ |
 | invalidFormat | Error message when value is not a boolean | `string` or `((val: any) => string)` |
 
 ### RegexpValidator
@@ -500,7 +501,7 @@ Example of using a validator:
 
 ```js
 // file stringValidator.js
-import { createRegexpValidatorFactory } from '@boichik/element-ui-validator';
+import { createRegexpValidatorFactory } from 'element-ui-validator';
 
 const defaultErrorMessages = {
 	invalidFormat: val => `Value "${val}" is not in the correct format!`,
@@ -520,16 +521,16 @@ websiteValidator.validate('https://example.com/'); // output => { valid: true, m
 
 #### RegexpValidator Config
 
-| Name     | Description                                    | Type               |
-| -------- | ---------------------------------------------- | ---------------- |
+| Name     | Description                                    | Type                 |
+| -------- | ---------------------------------------------- | -------------------- |
 | regexp   | Regular expression by which to check the value | `string` or `RegExp` |
-| flags    | Flag to regular expression                     | `string` |
-| messages | Object with error messages                     | `object` |
+| flags    | Flag to regular expression                     | `string`             |
+| messages | Object with error messages                     | `object`             |
 
 #### RegexpValidator Error Messages
 
-| Name          | Description                                                                     | Type                              |
-| ------------- | ------------------------------------------------------------------------------- | ------------------------------ |
+| Name          | Description                                                                     | Type                                 |
+| ------------- | ------------------------------------------------------------------------------- | ------------------------------------ |
 | invalidFormat | Error message when value does not match regular expression set in configuration | `string` or `((val: any) => string)` |
 
 ### ArrayValidator
@@ -540,7 +541,7 @@ Example of using a validator:
 
 ```js
 // file stringValidator.js
-import { createArrayValidatorFactory, createNumberValidatorFactory, createStringValidatorFactory } from '@boichik/element-ui-validator';
+import { createArrayValidatorFactory, createNumberValidatorFactory, createStringValidatorFactory } from 'element-ui-validator';
 
 const defaultErrorMessages = {
 	invalidFormat:  val  =>  `Value "${val}" is not in the correct format!`,
@@ -582,8 +583,8 @@ validator({ itemValidator: () => stringValidator()}).validate(['a', 'b', 'c', nu
 
 #### ArrayValidator Error Messages
 
-| Name             | Description                                                                                                                                                                 | Type    |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Name             | Description                                                                                                                                                                 | Type                                                           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | invalidFormat    | Error message when value is not an array                                                                                                                                    | `string` or `((val: any) => string)`                           |
 | invalidMinLength | Error message when the length of the value (array) is less than or not equal to the set parameter "**minLength**" in the configuration                                      | `string` or `((min: number, val: any) => string)`              |
 | invalidMaxLength | Error message when the length of the value (array) is greater than or not equal to the set parameter "**maxLength**" in the configuration                                   | `string` or `((max: number, val: any) => string)`              |
@@ -604,8 +605,8 @@ _The use of this validator is possible using the appropriate class, or using a f
 
 #### EmailValidator Error Messages
 
-| Name                | Description                                                                                                                                     | Type    |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Name                | Description                                                                                                                                     | Type                                                    |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | invalidFormat       | Error message when email is not in the correct format                                                                                           | `string` or `((val: any) => string)`                    |
 | notAllowedDomain    | Error message when email does not have a domain from the list of allowed ones set by the "**allowedDomainList**" parameter in the configuration | `string` or `((domains: string[], val: any) => string)` |
 | domainFromBlackList | Error message when an email has a domain from the list of invalid ones set by the "**blackListDomain**" parameter in the configuration          | `string` or `((domains: string[], val: any) => string)` |
@@ -636,7 +637,7 @@ export class MyCustomValidator {
 
 ```
 // validator.js
-import { createElementUIRuleBuilderFactory} from '@boichik/element-ui-validator';
+import { createElementUIRuleBuilderFactory} from 'element-ui-validator';
 import { MyCustomValidator } from './myCustomValidator';
 
 const validator = createElementUIRuleBuilderFactory({
