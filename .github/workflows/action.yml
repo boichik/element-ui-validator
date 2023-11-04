@@ -24,8 +24,8 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
-      # - name: Deploy to registry
-      #   if: ${{ github.event_name == 'release' }}
-      #   run: yarn publish --verbose --access public --no-git-tag-version --registry https://registry.npmjs.org/
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - name: Deploy to registry
+        if: ${{ github.event_name == 'release' }}
+        run: yarn publish --verbose --access public --no-git-tag-version --registry https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}

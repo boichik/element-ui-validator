@@ -16,6 +16,9 @@ export interface EmailValidatorConfig {
 	 *
 	 */
 	allowedDomainList?: string[];
+	/**
+	 * Array of domains that are not valid for email
+	 */
 	blackListDomain?: string[];
 	/**
 	 * Object with error messages
