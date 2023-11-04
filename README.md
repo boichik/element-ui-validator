@@ -2,6 +2,35 @@
 
 This package is intended to simplify the construction of validation rules for form fields for the [ElementUI](https://www.npmjs.com/package/element-ui) library
 
+## Links
+- [ElementUIRuleBuilder](#elementuirulebuilder)
+  - [Config](#config)
+  - [Error messages](#error-messages)
+  - [Methods](#methods)
+- Validators
+  - [StringValidator](#stringvalidator)
+    - [Config](#stringvalidator-config)
+    - [Error messages](#stringvalidator-error-messages)
+  - [NumberValidator](#numbervalidator)
+    - [Config](#numbervalidator-config)
+    - [Error messages](#numbervalidator-error-messages)
+  - [DateValidator](#datevalidator)
+    - [Config](#datevalidator-config)
+    - [Error messages](#datevalidator-error-messages)
+  - [BooleanValidator](#booleanvalidator)
+    - [Config](#booleanvalidator-config)
+    - [Error messages](#booleanvalidator-error-messages)
+  - [RegexpValidator](#regexpvalidator)
+    - [Config](#regexpvalidator-config)
+    - [Error messages](#regexpvalidator-error-messages)
+  - [ArrayValidator](#arrayvalidator)
+    - [Config](#arrayvalidator-config)
+    - [Error messages](#arrayvalidator-error-messages)
+  - [EmailValidator](#emailvalidator)
+    - [Config](#emailvalidator-config)
+    - [Error messages](#emailvalidator-error-messages)
+  - [Custom](#custom)
+
 ## Installation
 
 Using npm or yarn
@@ -218,7 +247,7 @@ const validatorsForConfig = {
 ....
 ```
 
-#### Error Messages
+### Error Messages
 
 | Name            | Description                          | Format   |
 | --------------- | ------------------------------------ | -------- |
@@ -306,14 +335,14 @@ const stringRule = ruleBuilder().useValidator("stringValidator", { minLength: 1,
 
 #### StringValidator Error Messages
 
-| Name             | Description                                                                                                 | Type    |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------- |
-| invalidFormat    | Error message when value is not a string (null, boolean, number...)                                         | `string | ((val: any) => string)`                           |
-| invalidMinLength | Error message when length is less than specified **minLength**                                              | `string | ((min: number, val: any) => string)`              |
-| invalidMaxLength | Error message when value length is greater than specified **maxLength**                                     | `string | ((max: number, val: any) => string)`              |
-| invalidRange     | Error message when value length is less than or greater than specified **minLength & maxLength** parameters | `string | ((min: number, max: number, val: any) => string)` |
-| invalidUppercase | Error message when value is not uppercase                                                                   | `string | ((val: any) => string)`                           |
-| invalidLowercase | Error message when value is not in lowercase                                                                | `string | ((val: any) => string)`                           |
+| Name             | Description                                                                                                 | Type                                                        | 
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| invalidFormat    | Error message when value is not a string (null, boolean, number...)                                         | `string` or `((val: any) => string)`                          |
+| invalidMinLength | Error message when length is less than specified **minLength**                                              | `string` or `((min: number, val: any) => string)`              |
+| invalidMaxLength | Error message when value length is greater than specified **maxLength**                                     | `string` or `((max: number, val: any) => string)`              |
+| invalidRange     | Error message when value length is less than or greater than specified **minLength & maxLength** parameters | `string` or `((min: number, max: number, val: any) => string)` |
+| invalidUppercase | Error message when value is not uppercase                                                                   | `string` or `((val: any) => string)`                           |
+| invalidLowercase | Error message when value is not in lowercase                                                                | `string` or `((val: any) => string)`                           |
 
 ### NumberValidator
 
@@ -396,32 +425,32 @@ const numberRule = ruleBuilder().useValidator("numberValidator", { min: 1, max: 
 
 #### NumberValidator Config
 
-| Name          | Description                                                                                                                                    | Type       |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------- |
-| min           | Minimum number. This parameter is responsible for the fact that the value entered must be greater than this.                                   | `number`   |
-| max           | Minimum number. Maximum number. This parameter is responsible for the fact that the entered value should be less than this.                    | `number`   |
-| minStrict     | Minimum strict number. This parameter is responsible for the fact that the value entered must be greater than and not equal to it.             | `number`   |
-| maxStrict     | Maximum strict number. This parameter is responsible for the fact that the value entered must be less than and not equal to it.                | `number`   |
-| allowString   | Allow numbers with string type.                                                                                                                | `boolean`  |
-| type          | Type of number. Using this parameter, you can validate values by type of number (integer or floating point).All types are accepted by default. | `'integer' | 'float'` |
-| decimalPlaces | Number of decimal places                                                                                                                       | `number`   |
-| messages      | Object with error messages                                                                                                                     | `object`   |
+| Name          | Description                                                                                                                                    | Type                  |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| min           | Minimum number. This parameter is responsible for the fact that the value entered must be greater than this.                                   | `number`              |
+| max           | Minimum number. Maximum number. This parameter is responsible for the fact that the entered value should be less than this.                    | `number`              |
+| minStrict     | Minimum strict number. This parameter is responsible for the fact that the value entered must be greater than and not equal to it.             | `number`              |
+| maxStrict     | Maximum strict number. This parameter is responsible for the fact that the value entered must be less than and not equal to it.                | `number`              |
+| allowString   | Allow numbers with string type.                                                                                                                | `boolean`             |
+| type          | Type of number. Using this parameter, you can validate values by type of number (integer or floating point).All types are accepted by default. | `'integer'` or `'float'` |
+| decimalPlaces | Number of decimal places                                                                                                                       | `number`              |
+| messages      | Object with error messages                                                                                                                     | `object`              |
 
 #### NumberValidator Error Messages
 
-| Name                      | Description                                                                                                                                    | Type    |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------------- | -------------------------------- |
-| invalidFormat             | Error message when value is not a number                                                                                                       | `string | ((value: any) => string)`                           |
-| invalidType               | Error message when the value does not match the type ("integer" or "float") that was set in the configuration                                  | `string | ((type: 'integer'                                   | 'float', value: any) => string)` |
-| invalidDecimalPlaces      | Error message when the value is greater than the decimal point than is set in the configuration                                                | `string | ((decimal: number, value: any) => string)`          |
-| invalidMin                | Error message when the value is less than or equal to the "**min**" parameter set in the configuration                                         | `string | ((min: number, value: any) => string)`              |
-| invalidMinStrict          | Error message when value is less than parameter "**invalidMinStrict**" set in configuration                                                    | `string | ((min: number, value: any) => string)`              |
-| invalidMax                | Error message when value is greater than or equal to "**max**" parameter set in configuration                                                  | `string | ((max: number, value: any) => string)`              |
-| invalidMaxStrict          | Error message when value is greater than parameter "**invalidMaxStrict**" set in configuration                                                 | `string | ((max: number, value: any) => string)`              |
-| invalidMinMax             | Error message when value is less than or less than "**min**" or greater than and not equal to the parameter "**max**" set in the configuration | `string | ((min: number, max: number, value: any) => string)` |
-| invalidMinStrictMax       | Error message when value is less than "**minStrict**" or greater than and not equal to the parameter "**max**" set in the configuration        | `string | ((min: number, max: number, value: any) => string)` |
-| invalidMinMaxStrict       | Error message when value is less than or less than "**min**" or more than the parameter "**maxStrict**" set in the configuration               | `string | ((min: number, max: number, value: any) => string)` |
-| invalidMinStrictMaxStrict | Error message when value is less than parameter "**minStrict**" or more than parameter "**maxStrict**" set in configuration                    | `string | ((min: number, max: number, value: any) => string)` |
+| Name                      | Description                                                                                                                                    | Type                      |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| invalidFormat             | Error message when value is not a number                                                                                                       | `string` or `((value: any) => string)`                           |
+| invalidType               | Error message when the value does not match the type ("integer" or "float") that was set in the configuration                                  | `string` or `((type: 'integer'                                   | 'float', value: any) => string)` |
+| invalidDecimalPlaces      | Error message when the value is greater than the decimal point than is set in the configuration                                                | `string` or `((decimal: number, value: any) => string)`          |
+| invalidMin                | Error message when the value is less than or equal to the "**min**" parameter set in the configuration                                         | `string` or `((min: number, value: any) => string)`              |
+| invalidMinStrict          | Error message when value is less than parameter "**invalidMinStrict**" set in configuration                                                    | `string` or `((min: number, value: any) => string)`              |
+| invalidMax                | Error message when value is greater than or equal to "**max**" parameter set in configuration                                                  | `string` or `((max: number, value: any) => string)`              |
+| invalidMaxStrict          | Error message when value is greater than parameter "**invalidMaxStrict**" set in configuration                                                 | `string` or `((max: number, value: any) => string)`              |
+| invalidMinMax             | Error message when value is less than or less than "**min**" or greater than and not equal to the parameter "**max**" set in the configuration | `string` or `((min: number, max: number, value: any) => string)` |
+| invalidMinStrictMax       | Error message when value is less than "**minStrict**" or greater than and not equal to the parameter "**max**" set in the configuration        | `string` or `((min: number, max: number, value: any) => string)` |
+| invalidMinMaxStrict       | Error message when value is less than or less than "**min**" or more than the parameter "**maxStrict**" set in the configuration               | `string` or `((min: number, max: number, value: any) => string)` |
+| invalidMinStrictMaxStrict | Error message when value is less than parameter "**minStrict**" or more than parameter "**maxStrict**" set in configuration                    | `string` or `((min: number, max: number, value: any) => string)` |
 
 ### DateValidator
 
@@ -430,20 +459,20 @@ _The use of this validator is possible using the appropriate class, or using a f
 
 #### DateValidator Config
 
-| Name     | Description                                              | Type     |
-| -------- | -------------------------------------------------------- | -------- | ------ | ------- |
-| minDate  | Minimum date. Date must be greater than or equal to this | `Date    | string | number` |
-| maxDate  | Maximum date. Date must be less than or equal to this    | `Date    | string | number` |
+| Name     | Description                                              | Type                        |
+| -------- | -------------------------------------------------------- | --------------------------- |
+| minDate  | Minimum date. Date must be greater than or equal to this | `Date I string I number` |
+| maxDate  | Maximum date. Date must be less than or equal to this    | `Date I string I number` |
 | messages | Object with error messages                               | `object` |
 
 #### DateValidator Error Messages
 
-| Name           | Description                                                                                                                                                                | Type    |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------- |
-| invalidFormat  | Error message when value is not a date                                                                                                                                     | string  | ((val: any) => string)                        |
-| invalidMinDate | Error message when the value must be greater than or equal to the parameter "**minDate**" set in the configuration                                                         | `string | ((min: Date, val: any) => string)`            |
-| invalidMaxDate | Error message when the value must be less than or equal to the parameter "**maxDate**" set in the configuration                                                            | `string | ((max: Date, val: any) => string)`            |
-| invalidRange   | Error message when the value must be greater than or equal to the parameter "**minDate**" or be less than or equal to the parameter "**maxDate**" set in the configuration | `string | ((min: Date, max: Date, val: any) => string)` |
+| Name           | Description                                                                                                                                                                | Type    
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| invalidFormat  | Error message when value is not a date                                                                                                                                     | string` or `((val: any) => string)                        |
+| invalidMinDate | Error message when the value must be greater than or equal to the parameter "**minDate**" set in the configuration                                                         | `string` or `((min: Date, val: any) => string)`            |
+| invalidMaxDate | Error message when the value must be less than or equal to the parameter "**maxDate**" set in the configuration                                                            | `string` or `((max: Date, val: any) => string)`            |
+| invalidRange   | Error message when the value must be greater than or equal to the parameter "**minDate**" or be less than or equal to the parameter "**maxDate**" set in the configuration | `string` or `((min: Date, max: Date, val: any) => string)` |
 
 ### BooleanValidator
 
@@ -459,9 +488,9 @@ _The use of this validator is possible using the appropriate class, or using a f
 
 #### BooleanValidator Error Messages
 
-| Name          | Description                               | Type    |
-| ------------- | ----------------------------------------- | ------- | ----------------------- |
-| invalidFormat | Error message when value is not a boolean | `string | ((val: any) => string)` |
+| Name          | Description                               | Type                              |
+| ------------- | ----------------------------------------- | ------------------------------ |
+| invalidFormat | Error message when value is not a boolean | `string` or `((val: any) => string)` |
 
 ### RegexpValidator
 
@@ -491,17 +520,17 @@ websiteValidator.validate('https://example.com/'); // output => { valid: true, m
 
 #### RegexpValidator Config
 
-| Name     | Description                                    | Type     |
-| -------- | ---------------------------------------------- | -------- | ------- |
-| regexp   | Regular expression by which to check the value | `string  | RegExp` |
+| Name     | Description                                    | Type               |
+| -------- | ---------------------------------------------- | ---------------- |
+| regexp   | Regular expression by which to check the value | `string` or `RegExp` |
 | flags    | Flag to regular expression                     | `string` |
 | messages | Object with error messages                     | `object` |
 
 #### RegexpValidator Error Messages
 
-| Name          | Description                                                                     | Type    |
-| ------------- | ------------------------------------------------------------------------------- | ------- | ----------------------- |
-| invalidFormat | Error message when value does not match regular expression set in configuration | `string | ((val: any) => string)` |
+| Name          | Description                                                                     | Type                              |
+| ------------- | ------------------------------------------------------------------------------- | ------------------------------ |
+| invalidFormat | Error message when value does not match regular expression set in configuration | `string` or `((val: any) => string)` |
 
 ### ArrayValidator
 
@@ -554,11 +583,11 @@ validator({ itemValidator: () => stringValidator()}).validate(['a', 'b', 'c', nu
 #### ArrayValidator Error Messages
 
 | Name             | Description                                                                                                                                                                 | Type    |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------- |
-| invalidFormat    | Error message when value is not an array                                                                                                                                    | `string | ((val: any) => string)`                           |
-| invalidMinLength | Error message when the length of the value (array) is less than or not equal to the set parameter "**minLength**" in the configuration                                      | `string | ((min: number, val: any) => string)`              |
-| invalidMaxLength | Error message when the length of the value (array) is greater than or not equal to the set parameter "**maxLength**" in the configuration                                   | `string | ((max: number, val: any) => string)`              |
-| invalidRange     | Error message when the length of the value (array) is less than or greater than or not equal to the set parameters "**minLength**" and "**maxLength**" in the configuration | `string | ((min: number, max: number, val: any) => string)` |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| invalidFormat    | Error message when value is not an array                                                                                                                                    | `string` or `((val: any) => string)`                           |
+| invalidMinLength | Error message when the length of the value (array) is less than or not equal to the set parameter "**minLength**" in the configuration                                      | `string` or `((min: number, val: any) => string)`              |
+| invalidMaxLength | Error message when the length of the value (array) is greater than or not equal to the set parameter "**maxLength**" in the configuration                                   | `string` or `((max: number, val: any) => string)`              |
+| invalidRange     | Error message when the length of the value (array) is less than or greater than or not equal to the set parameters "**minLength**" and "**maxLength**" in the configuration | `string` or `((min: number, max: number, val: any) => string)` |
 
 ### EmailValidator
 
@@ -576,10 +605,10 @@ _The use of this validator is possible using the appropriate class, or using a f
 #### EmailValidator Error Messages
 
 | Name                | Description                                                                                                                                     | Type    |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------ |
-| invalidFormat       | Error message when email is not in the correct format                                                                                           | `string | ((val: any) => string)`                    |
-| notAllowedDomain    | Error message when email does not have a domain from the list of allowed ones set by the "**allowedDomainList**" parameter in the configuration | `string | ((domains: string[], val: any) => string)` |
-| domainFromBlackList | Error message when an email has a domain from the list of invalid ones set by the "**blackListDomain**" parameter in the configuration          | `string | ((domains: string[], val: any) => string)` |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| invalidFormat       | Error message when email is not in the correct format                                                                                           | `string` or `((val: any) => string)`                    |
+| notAllowedDomain    | Error message when email does not have a domain from the list of allowed ones set by the "**allowedDomainList**" parameter in the configuration | `string` or `((domains: string[], val: any) => string)` |
+| domainFromBlackList | Error message when an email has a domain from the list of invalid ones set by the "**blackListDomain**" parameter in the configuration          | `string` or `((domains: string[], val: any) => string)` |
 
 ### Custom
 
