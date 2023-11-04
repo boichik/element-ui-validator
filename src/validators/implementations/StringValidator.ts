@@ -103,7 +103,7 @@ export const createStringValidatorFactory = ({
 	} = {},
 }: {
 	messages?: StringValidatorMessages;
-}): StringValidatorFactory => {
+} = {}): StringValidatorFactory => {
 	return ({
 		minLength,
 		maxLength,

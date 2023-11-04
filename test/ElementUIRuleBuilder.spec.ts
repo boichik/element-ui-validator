@@ -194,7 +194,7 @@ describe('ElementUIRuleBuilder', () => {
 
 		const { validator } = builder().useValidator('numberValidator').getRule();
 
-		let message = null;
+		let message: any = null;
 
 		validator('', '', e => {
 			message = e;
@@ -214,7 +214,7 @@ describe('ElementUIRuleBuilder', () => {
 			.setRequired(true)
 			.getRule();
 
-		let message = null;
+		let message: any = null;
 
 		validator('', '', e => {
 			message = e;
@@ -236,7 +236,7 @@ describe('ElementUIRuleBuilder', () => {
 			.setRequired(true)
 			.getRule();
 
-		let message = null;
+		let message: any = null;
 
 		validator('', '', e => {
 			message = e;
@@ -259,7 +259,7 @@ describe('ElementUIRuleBuilder', () => {
 			.setRequired(true)
 			.getRule();
 
-		let message = null;
+		let message: any = null;
 
 		validator('', 'test', e => {
 			message = e;
@@ -282,7 +282,7 @@ describe('ElementUIRuleBuilder', () => {
 			.setRequired(true)
 			.getRule();
 
-		let message = null;
+		let message: any = null;
 
 		validator('', 'test-test', e => {
 			message = e;

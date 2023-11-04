@@ -34,6 +34,10 @@ import {
 	ElementUIValidator,
 	ElementUIRule,
 } from './types';
+import {
+	EmailValidator,
+	createEmailValidatorFactory,
+} from './validators/implementations/EmailValidator';
 
 export {
 	ElementUIRuleBuilderImpl,
@@ -43,6 +47,7 @@ export {
 	NumberValidator,
 	RegexpValidator,
 	StringValidator,
+	EmailValidator,
 	createElementUIRuleBuilderFactory,
 	createArrayValidatorFactory,
 	createBooleanValidatorFactory,
@@ -50,6 +55,7 @@ export {
 	createNumberValidatorFactory,
 	createRegexpValidatorFactory,
 	createStringValidatorFactory,
+	createEmailValidatorFactory,
 	ValidationResult,
 	ValidateTrigger,
 	ElementUIValidator,

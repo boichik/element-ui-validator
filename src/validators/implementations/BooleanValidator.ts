@@ -42,7 +42,7 @@ export const createBooleanValidatorFactory = ({
 	messages: { invalidFormat: defaultInvalidFormat } = {},
 }: {
 	messages?: BooleanValidatorMessages;
-}): BooleanValidatorFactory => {
+} = {}): BooleanValidatorFactory => {
 	return ({
 		allowString,
 		messages: { invalidFormat = defaultInvalidFormat } = {},

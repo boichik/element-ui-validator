@@ -11,8 +11,21 @@
 		"rules",
 		"rule builder",
 		"validator controller",
-		"element-ui-validator"
+		"element-ui-validator",
+		"element",
+		"element-plus",
+		"vue",
+		"vue validator"
 	],
+	"homepage": "https://github.com/boichik/element-ui-validator#readme",
+	"bugs": {
+		"url": "https://github.com/boichik/element-ui-validator/issues",
+		"email": "vl.boichik@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/boichik/element-ui-validator.git"
+	},
 	"author": "boichik",
 	"license": "MIT",
 	"main": "lib/index.js",

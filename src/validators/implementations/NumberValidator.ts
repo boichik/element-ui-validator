@@ -202,7 +202,7 @@ export const createNumberValidatorFactory = ({
 	} = {},
 }: {
 	messages?: NumberValidatorMessages;
-}): NumberValidatorFactory => {
+} = {}): NumberValidatorFactory => {
 	return ({
 		type,
 		decimalPlaces,
