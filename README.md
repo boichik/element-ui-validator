@@ -118,7 +118,7 @@ _If the "website" field is not filled in, we will receive the error "Required fi
 <script>
 import {validatorBuilder} from  './validator'
 ...
-export  default {
+export  default{
 	...
 	computed: {
 		rules(){
