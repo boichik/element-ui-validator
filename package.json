@@ -1,6 +1,6 @@
 {
 	"name": "element-ui-validator",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "This package is designed to create validation rules for the form of the ElementUI library.",
 	"keywords": [
 		"validation",
