@@ -1,4 +1,4 @@
-import { ElementUIValidator, ValidationResult } from 'src/types';
+import { ElementUIValidator, ValidationResult } from '../../types';
 import { getErrorMessage, getValidationResult } from '../utils';
 import {
 	EmailValidatorConfig,

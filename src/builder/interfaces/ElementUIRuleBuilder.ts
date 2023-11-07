@@ -44,9 +44,9 @@ export interface ElementUIRuleBuilder<T extends ValidatorsContext = {}> {
 	 * 	.useValidator("stringValidator", { minLength: 1, maxLength: 3 })
 	 * 	.useValidator("stringValidator", { minLength: 1, maxLength: 999 });
 	 */
-	useValidator(
-		name: keyof T,
-		...args: Parameters<T[keyof T]>
+	useValidator<K extends keyof T>(
+		name: K,
+		...args: Parameters<T[K]>
 	): ElementUIRuleBuilder<T>;
 	/**
 	 * Method by which you can set the mandatory field. Default is "false", return "this"

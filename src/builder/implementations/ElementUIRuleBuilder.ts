@@ -64,7 +64,7 @@ export class ElementUIRuleBuilderImpl<T extends ValidatorsContext>
 	 */
 	private _trigger: ValidateTrigger = 'blur';
 
-	useValidator(name: keyof T, ...args: any) {
+	useValidator<K extends keyof T>(name: K, ...args: any) {
 		if ((name as string) in this._validators) {
 			this._useValidators.push(this._validators[name as string](...args));
 		} else {
