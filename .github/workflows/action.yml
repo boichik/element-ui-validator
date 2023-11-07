@@ -26,6 +26,6 @@ jobs:
           cmd: build
       - name: Deploy to registry
         if: ${{ github.event_name == 'release' }}
-        run: yarn publish --verbose --access public --no-git-tag-version --registry https://registry.npmjs.org/
+        run: yarn publish --verbose --access public --no-git-tag-version
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
