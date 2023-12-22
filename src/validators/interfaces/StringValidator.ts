@@ -7,6 +7,9 @@ export interface StringValidatorMessages {
 	invalidRange?: string | ((min: number, max: number, val: any) => string);
 	invalidUppercase?: string | ((val: any) => string);
 	invalidLowercase?: string | ((val: any) => string);
+	hasDisallowedSymbols?:
+		| string
+		| ((notAllowedSymbols: string[], val: any) => string);
 }
 
 export interface StringValidatorConfig {
@@ -44,6 +47,14 @@ export interface StringValidatorConfig {
 	 * StringValidator({ onlyLowercase: true }).validate("hello world!") // valid
 	 */
 	onlyLowercase?: boolean;
+	/**
+	 * The parameter responsible for checking the tape whether it contains forbidden characters
+	 * @example
+	 * StringValidator({ disallowedSymbols: ["-"] }).validate("hello-world") // invalid
+	 *
+	 * StringValidator({ disallowedSymbols: ["-"] }).validate("hello world") // valid
+	 */
+	disallowedSymbols?: string[];
 	/**
 	 * Object with error messages
 	 */

@@ -6,6 +6,10 @@ import {
 } from '../interfaces/StringValidator';
 import { getValidationResult, getErrorMessage, isNumber } from '../utils';
 
+const _hasDisallowedSymbols = (value: string, disallowedSymbols: string[]) => {
+	return disallowedSymbols.some(symbol => value.includes(symbol));
+};
+
 export class StringValidator implements ElementUIValidator {
 	protected _errorMessages: StringValidatorMessages;
 
@@ -18,6 +22,22 @@ export class StringValidator implements ElementUIValidator {
 			return getValidationResult(
 				false,
 				getErrorMessage(this._errorMessages.invalidFormat, value)
+			);
+		}
+
+		if (
+			!!this._config?.disallowedSymbols &&
+			!!Array.isArray(this._config.disallowedSymbols) &&
+			!!this._config.disallowedSymbols.length &&
+			!!_hasDisallowedSymbols(value, this._config.disallowedSymbols)
+		) {
+			return getValidationResult(
+				false,
+				getErrorMessage(
+					this._errorMessages.hasDisallowedSymbols,
+					this._config.disallowedSymbols,
+					value
+				)
 			);
 		}
 
@@ -100,6 +120,7 @@ export const createStringValidatorFactory = ({
 		invalidRange: defaultInvalidRange,
 		invalidUppercase: defaultInvalidUppercase,
 		invalidLowercase: defaultInvalidLowercase,
+		hasDisallowedSymbols: defaultHasDisallowedSymbols,
 	} = {},
 }: {
 	messages?: StringValidatorMessages;
@@ -109,6 +130,7 @@ export const createStringValidatorFactory = ({
 		maxLength,
 		onlyLowercase,
 		onlyUppercase,
+		disallowedSymbols,
 		messages: {
 			invalidFormat = defaultInvalidFormat,
 			invalidMinLength = defaultInvalidMinLength,
@@ -116,6 +138,7 @@ export const createStringValidatorFactory = ({
 			invalidRange = defaultInvalidRange,
 			invalidLowercase = defaultInvalidLowercase,
 			invalidUppercase = defaultInvalidUppercase,
+			hasDisallowedSymbols = defaultHasDisallowedSymbols,
 		} = {},
 	}: StringValidatorConfig = {}) =>
 		new StringValidator({
@@ -123,6 +146,7 @@ export const createStringValidatorFactory = ({
 			maxLength,
 			onlyLowercase,
 			onlyUppercase,
+			disallowedSymbols,
 			messages: {
 				invalidFormat,
 				invalidMinLength,
@@ -130,6 +154,7 @@ export const createStringValidatorFactory = ({
 				invalidRange,
 				invalidLowercase,
 				invalidUppercase,
+				hasDisallowedSymbols,
 			},
 		});
 };

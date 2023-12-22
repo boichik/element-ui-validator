@@ -172,4 +172,37 @@ describe('StringValidator', () => {
 			expect(message).toEqual(expectedMessage);
 		}
 	);
+
+	it.each([
+		['abc', undefined, true],
+		['abc!', undefined, true],
+		['abc!', null, true],
+		['abc!', {}, true],
+		['abc!', [], true],
+		['abc!', false, true],
+		['ABCD!', true, true],
+		['abcdf!', ['!'], false],
+		['Hello WORLD!', ['&', '!', '.'], false],
+		['hello-world', ['-'], false],
+	])(
+		'String set config disallowedSymbols : Iteration - %# | val: %p | disallowedSymbols: %i | expect: %s',
+		(...arg) => {
+			const stringValidatorFactory = createStringValidatorFactory({ messages });
+
+			const [value, disallowedSymbols, validationResult] = arg;
+
+			const { valid, message } = stringValidatorFactory({
+				disallowedSymbols: disallowedSymbols as string[],
+			}).validate(value);
+
+			expect(valid).toEqual(validationResult);
+
+			let expectedMessage = !validationResult
+				? typeof messages.hasDisallowedSymbols === 'function' &&
+				  messages.hasDisallowedSymbols(disallowedSymbols as string[], value)
+				: null;
+
+			expect(message).toEqual(expectedMessage);
+		}
+	);
 });

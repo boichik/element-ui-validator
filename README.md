@@ -287,6 +287,12 @@ const defaultErrorMessages = {
 		`Value "${val}" must be greater than or equal to ${min} and less than or equal to ${max}!`,
 	invalidUppercase: val => `Value "${val}" must be uppercase!`,
 	invalidLowercase: val => `Value "${val}" must be lowercase!`,
+	hasDisallowedSymbols: (disallowedSymbols, value) =>
+		`The value "${value}" cannot include the following characters ${
+			Array.isArray(disallowedSymbols) && disallowedSymbols.length
+				? disallowedSymbols.join(',')
+				: ''
+		}`,
 };
 
 const validator = createStringValidatorFactory({
@@ -306,6 +312,8 @@ validator({ minLength: 1, maxLength: 3 }).validate('test'); // { valid: false, m
 validator({ onlyUppercase: true }).validate('test'); // { valid: false, message: "Value "test" must be uppercase!" }
 
 validator({ onlyLowercase: true }).validate('Test'); // { valid: false, message: "Value "test" must be lowercase!" }
+
+validator({ disallowedSymbols: ['-'] }).validate('hello-world'); // { valid: false, message: 'The value "hello-world" cannot include the following characters -' }
 ```
 
 Example of using a validator with a builder:
@@ -326,24 +334,26 @@ const stringRule = ruleBuilder().useValidator("stringValidator", { minLength: 1,
 
 #### StringValidator Config
 
-| Name          | Description                                                                                         | Type      |
-| ------------- | --------------------------------------------------------------------------------------------------- | --------- |
-| minLength     | Parameter responsible for the minimum length of the string.                                         | `number`  |
-| maxLength     | Parameter responsible for the maximum length of the string.                                         | `number`  |
-| onlyUppercase | Parameter responsible for checking if the string is in uppercase.                                   | `boolean` |
-| onlyLowercase | Parameter responsible for checking if the string is in lowercase.                                   | `boolean` |
-| messages      | This parameter is an error message object. If the parameter is empty, errors will not be displayed! | `object`  |
+| Name              | Description                                                                                         | Type       |
+| ----------------- | --------------------------------------------------------------------------------------------------- | ---------- |
+| minLength         | Parameter responsible for the minimum length of the string.                                         | `number`   |
+| maxLength         | Parameter responsible for the maximum length of the string.                                         | `number`   |
+| onlyUppercase     | Parameter responsible for checking if the string is in uppercase.                                   | `boolean`  |
+| onlyLowercase     | Parameter responsible for checking if the string is in lowercase.                                   | `boolean`  |
+| disallowedSymbols | The parameter responsible for checking the tape whether it contains forbidden characters            | `string[]` |
+| messages          | This parameter is an error message object. If the parameter is empty, errors will not be displayed! | `object`   |
 
 #### StringValidator Error Messages
 
-| Name             | Description                                                                                                 | Type                                                           |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| invalidFormat    | Error message when value is not a string (null, boolean, number...)                                         | `string` or `((val: any) => string)`                           |
-| invalidMinLength | Error message when length is less than specified **minLength**                                              | `string` or `((min: number, val: any) => string)`              |
-| invalidMaxLength | Error message when value length is greater than specified **maxLength**                                     | `string` or `((max: number, val: any) => string)`              |
-| invalidRange     | Error message when value length is less than or greater than specified **minLength & maxLength** parameters | `string` or `((min: number, max: number, val: any) => string)` |
-| invalidUppercase | Error message when value is not uppercase                                                                   | `string` or `((val: any) => string)`                           |
-| invalidLowercase | Error message when value is not in lowercase                                                                | `string` or `((val: any) => string)`                           |
+| Name                 | Description                                                                                                 | Type                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| invalidFormat        | Error message when value is not a string (null, boolean, number...)                                         | `string` or `((val: any) => string)`                              |
+| invalidMinLength     | Error message when length is less than specified **minLength**                                              | `string` or `((min: number, val: any) => string)`                 |
+| invalidMaxLength     | Error message when value length is greater than specified **maxLength**                                     | `string` or `((max: number, val: any) => string)`                 |
+| invalidRange         | Error message when value length is less than or greater than specified **minLength & maxLength** parameters | `string` or `((min: number, max: number, val: any) => string)`    |
+| invalidUppercase     | Error message when value is not uppercase                                                                   | `string` or `((val: any) => string)`                              |
+| invalidLowercase     | Error message when value is not in lowercase                                                                | `string` or `((val: any) => string)`                              |
+| hasDisallowedSymbols | Error message when value contains forbidden characters                                                      | `string` or `((notAllowedSymbols: string[], val: any) => string)` |
 
 ### NumberValidator
 
@@ -440,9 +450,9 @@ const numberRule = ruleBuilder().useValidator("numberValidator", { min: 1, max: 
 #### NumberValidator Error Messages
 
 | Name                      | Description                                                                                                                                    | Type                                                             |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | invalidFormat             | Error message when value is not a number                                                                                                       | `string` or `((value: any) => string)`                           |
-| invalidType               | Error message when the value does not match the type ("integer" or "float") that was set in the configuration                                  | `string` or `((type: string, value: any) => string)` |
+| invalidType               | Error message when the value does not match the type ("integer" or "float") that was set in the configuration                                  | `string` or `((type: string, value: any) => string)`             |
 | invalidDecimalPlaces      | Error message when the value is greater than the decimal point than is set in the configuration                                                | `string` or `((decimal: number, value: any) => string)`          |
 | invalidMin                | Error message when the value is less than or equal to the "**min**" parameter set in the configuration                                         | `string` or `((min: number, value: any) => string)`              |
 | invalidMinStrict          | Error message when value is less than parameter "**invalidMinStrict**" set in configuration                                                    | `string` or `((min: number, value: any) => string)`              |

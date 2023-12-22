@@ -66,6 +66,12 @@ export const stringValidatorMessages: Required<StringValidatorMessages> = {
 		`Value "${val}" must be greater than or equal to ${min} and less than or equal to ${max}!`,
 	invalidUppercase: val => `Value "${val}" must be uppercase!`,
 	invalidLowercase: val => `Value "${val}" must be lowercase!`,
+	hasDisallowedSymbols: (disallowedSymbols, value) =>
+		`The value "${value}" cannot include the following characters ${
+			Array.isArray(disallowedSymbols) && disallowedSymbols.length
+				? disallowedSymbols.join(',')
+				: ''
+		}`,
 };
 
 export const emailValidatorMessages: Required<EmailValidatorMessages> = {
