@@ -1,3 +1,20 @@
+// TYPES
+import { ElementUIRuleBuilderFactory } from './builder/interfaces/ElementUIRuleBuilder';
+import { ArrayValidatorFactory } from './validators/interfaces/ArrayValidator';
+import { DateValidatorFactory } from './validators/interfaces/DateValidator';
+import { NumberValidatorFactory } from './validators/interfaces/NumberValidator';
+import { BooleanValidatorFactory } from './validators/interfaces/BooleanValidator';
+import { RegexpValidatorFactory } from './validators/interfaces/RegexpValidator';
+import { StringValidatorFactory } from './validators/interfaces/StringValidator';
+import { EmailValidatorFactory } from './validators/interfaces/EmailValidator';
+import {
+	ValidationResult,
+	ValidateTrigger,
+	ElementUIValidator,
+	ElementUIRule,
+	ValidatorFactory,
+} from './types';
+
 import {
 	ElementUIRuleBuilderImpl,
 	createElementUIRuleBuilderFactory,
@@ -29,12 +46,6 @@ import {
 } from './validators/implementations/StringValidator';
 
 import {
-	ValidationResult,
-	ValidateTrigger,
-	ElementUIValidator,
-	ElementUIRule,
-} from './types';
-import {
 	EmailValidator,
 	createEmailValidatorFactory,
 } from './validators/implementations/EmailValidator';
@@ -60,4 +71,13 @@ export {
 	ValidateTrigger,
 	ElementUIValidator,
 	ElementUIRule,
+	ValidatorFactory,
+	ElementUIRuleBuilderFactory,
+	DateValidatorFactory,
+	ArrayValidatorFactory,
+	NumberValidatorFactory,
+	StringValidatorFactory,
+	RegexpValidatorFactory,
+	BooleanValidatorFactory,
+	EmailValidatorFactory,
 };
